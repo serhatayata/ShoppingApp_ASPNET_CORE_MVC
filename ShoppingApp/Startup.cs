@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShoppingApp.Repository.Abstract;
+using ShoppingApp.Repository.Concrete.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +26,10 @@ namespace ShoppingApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ShoppingAppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),b=>b.MigrationsAssembly("ShoppingApp.Repository")));
+            services.AddSingleton<IProductRepository, EfProductRepository>();
+            services.AddSingleton<ICategoryRepository, EfCategoryRepository>();
+            services.AddSingleton<IOrderRepository, EfOrderRepository>();
             services.AddControllersWithViews();
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
@@ -41,7 +48,7 @@ namespace ShoppingApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseStatusCodePages();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -53,6 +60,9 @@ namespace ShoppingApp
                     template: "{controller=Home}/{action=Index}/{id?}"
                     );
             });
+
+            SeedData.EnsurePopulated(app);
+
         }
     }
 }
