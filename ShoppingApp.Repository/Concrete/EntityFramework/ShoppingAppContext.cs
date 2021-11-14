@@ -24,11 +24,21 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductCategory>().HasKey(pk=>new { pk.ProductID,pk.CategoryID} );
+
+            modelBuilder.Entity<ProductCategory>()
+                .HasOne(bc => bc.Product)
+                .WithMany(b => b.ProductCategories)
+                .HasForeignKey(bc => bc.ProductID);
+            modelBuilder.Entity<ProductCategory>()
+                .HasOne(bc => bc.Category)
+                .WithMany(c => c.ProductCategories)
+                .HasForeignKey(bc => bc.CategoryID);
+
         }
 
     }

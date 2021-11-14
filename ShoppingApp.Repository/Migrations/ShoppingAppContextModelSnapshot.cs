@@ -40,11 +40,23 @@ namespace ShoppingApp.Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isFeatured")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isHome")
+                        .HasColumnType("bit");
 
                     b.HasKey("ProductID");
 
@@ -63,7 +75,7 @@ namespace ShoppingApp.Repository.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("ProductCategory");
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("ShoppingApp.Entity.Entities.ProductCategory", b =>

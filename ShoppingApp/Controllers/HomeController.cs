@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ShoppingApp.Entity.Entities;
 using ShoppingApp.Models;
 using ShoppingApp.Repository.Abstract;
 using System;
@@ -13,18 +14,27 @@ namespace ShoppingApp.Controllers
     public class HomeController : Controller
     {
         private IProductRepository proRepository;
-        public HomeController(IProductRepository _proRepository)
+        private IUnitOfWork uowRepository;
+        public HomeController(IProductRepository _proRepository,IUnitOfWork _uowRepository)
         {
             proRepository = _proRepository;
+            uowRepository = _uowRepository;
         }
         public IActionResult Index()
         {
-            var x = proRepository.GetAll();
-            return View(proRepository.GetAll());
+            return View(uowRepository.Products.GetAll().Where(x=>x.isApproved && x.isHome).ToList());
         }
         public IActionResult Details(int id)
         {
             return View(proRepository.Get(id));
+        }
+        public IActionResult Create()
+        {
+            var prd = new Product() { ProductName = "deneme", Price = 500 };
+            uowRepository.Products.Add(prd);
+            uowRepository.SaveChanges();
+            return RedirectToAction("Index");
+
         }
     }
 }

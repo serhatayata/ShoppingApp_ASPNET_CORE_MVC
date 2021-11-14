@@ -20,6 +20,18 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
         {
             context = _context;
         }
+
+        public IEnumerable<CategoryModel> GetAllWithProductCount()
+        { 
+            var x =  context.Categories.Include(x=>x.ProductCategories).Select(x => new CategoryModel()
+            {
+                CategoryID = x.CategoryID,
+                CategoryName = x.CategoryName,
+                Count = x.ProductCategories.Count()
+            });
+            return x;
+        }
+
         public Category GetByName(string name) 
         {
             return context.Categories.Where(x => x.CategoryName == name).FirstOrDefault();

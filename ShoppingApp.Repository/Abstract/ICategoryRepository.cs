@@ -12,5 +12,6 @@ namespace ShoppingApp.Repository.Abstract
     public interface ICategoryRepository:IGenericRepository<Category>
     {
         Category GetByName(string name);
+        IEnumerable<CategoryModel> GetAllWithProductCount();
     }
 }

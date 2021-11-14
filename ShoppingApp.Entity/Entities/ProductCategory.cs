@@ -9,8 +9,8 @@ namespace ShoppingApp.Entity.Entities
     public class ProductCategory
     {
         public int CategoryID { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
         public int ProductID { get; set; }
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

@@ -22,12 +22,12 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
             {
                 var products = new[]
                 {
-                    new Product(){ProductName="Product1",Price=500},
-                    new Product(){ProductName="Product2",Price=100},
-                    new Product(){ProductName="Product3",Price=200},
-                    new Product(){ProductName="Product4",Price=300}
+                    new Product(){ProductName="Product1",Price=500,Image="product1_thumb.jpg",isHome=true,isApproved=true,isFeatured=true},
+                    new Product(){ProductName="Product2",Price=100,Image="product2_thumb.jpg",isHome=true,isApproved=true,isFeatured=true},
+                    new Product(){ProductName="Product3",Price=200,Image="product3_thumb.jpg",isHome=true,isApproved=true,isFeatured=true},
+                    new Product(){ProductName="Product4",Price=300,Image="product4_thumb.jpg",isHome=true,isApproved=true,isFeatured=true}
                 };
-
+                 
                 context.Products.AddRange(products);
                 var categories = new[]
                 {

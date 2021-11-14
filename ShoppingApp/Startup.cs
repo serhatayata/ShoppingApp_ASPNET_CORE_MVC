@@ -27,9 +27,9 @@ namespace ShoppingApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ShoppingAppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),b=>b.MigrationsAssembly("ShoppingApp.Repository")));
-            services.AddSingleton<IProductRepository, EfProductRepository>();
-            services.AddSingleton<ICategoryRepository, EfCategoryRepository>();
-            services.AddSingleton<IOrderRepository, EfOrderRepository>();
+            services.AddTransient<IProductRepository, EfProductRepository>();
+            services.AddTransient<ICategoryRepository, EfCategoryRepository>();
+            services.AddTransient<IUnitOfWork, EfUnitOfWork>();
             services.AddControllersWithViews();
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
