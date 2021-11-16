@@ -14,7 +14,7 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
     public class EfProductRepository : EfGenericRepository<Product,ShoppingAppContext>,IProductRepository
     {
         private ShoppingAppContext context;
-        public EfProductRepository(ShoppingAppContext ctx)
+        public EfProductRepository(ShoppingAppContext ctx):base(ctx)
         {
             context = ctx;
         }

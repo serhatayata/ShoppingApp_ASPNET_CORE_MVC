@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingApp.Repository.Abstract
 {
-    public interface IUnitOfWork:IDisposable
+    public interface IUnitOfWork
     {
         IProductRepository Products { get; }
         ICategoryRepository Categories { get; }

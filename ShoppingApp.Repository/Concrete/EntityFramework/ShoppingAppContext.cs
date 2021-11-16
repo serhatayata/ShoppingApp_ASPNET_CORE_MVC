@@ -24,6 +24,8 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<ProductAttribute> Attributes { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

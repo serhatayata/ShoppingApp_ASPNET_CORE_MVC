@@ -13,64 +13,45 @@ namespace ShoppingApp.Core.DataAccess.EntityFramework
         where T : class,IEntity,new()
         where TContext:DbContext,new()
     {
+
+        protected readonly DbContext context;
+        public EfGenericRepository(DbContext _context)
+        {
+            context = _context;
+        }
         public void Add(T entity)
         {
-            using (TContext context = new TContext())
-            {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
-            }
+            context.Set<T>().Add(entity);
         }
 
         public void Delete(T entity)
         {
-            using (TContext context = new TContext())
-            {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
+            context.Set<T>().Remove(entity);
         }
 
         public void Edit(T entity)
         {
-            using (TContext context = new TContext())
-            {
-                context.Entry(entity).State = EntityState.Modified;
-            }
+            context.Entry(entity).State = EntityState.Modified;
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
+        public IQueryable<T> Find(Expression<Func<T, bool>> predicate)
         {
-            using (TContext context = new TContext())
-            {
-                return context.Set<T>().Where(predicate);
-            }
+            return context.Set<T>().Where(predicate);
         }
 
         public T Get(int id)
         {
-            using (TContext context = new TContext())
-            {
-                return context.Set<T>().Find(id);
-            }
+            return context.Set<T>().Find(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
-            using (TContext context = new TContext())
-            {
-                return context.Set<T>().ToList();
-            }
+            return context.Set<T>();
         }
 
         public void Save()
         {
-            using (TContext context = new TContext())
-            {
-                context.SaveChanges();
-            }
+            context.SaveChanges();
         }
     }
 }

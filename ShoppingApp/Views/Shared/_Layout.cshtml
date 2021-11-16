@@ -29,110 +29,21 @@
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed d-inline-block" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+
                         <a class="navbar-brand" href="#">
                             <img src="~/images/shopping-logo.png" style="width:70px; height:50px" alt="ShoppingApp-img">
                         </a>
-                       
+
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="index-2.html">Homepage 1</a></li>
-                                    <li><a href="index-3.html">Homepage 2</a></li>
-                                    <li><a href="index-4.html">Homepage 3</a></li>
-                                    <li><a href="index-5.html">Homepage 4</a></li>
-                                    <li><a href="index-6.html">Home 5 (Full Carousel)</a></li>
-                                </ul>
-                            </li>
+                            <li><a asp-controller="Home" asp-action="Index"><i class="fa fa-home fa-fw"></i> Home</a></li>
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="about-us.html">About Us</a></li>
-                                    <li><a href="pricing.html">Pricing</a></li>
-                                    <li><a href="services.html">Services</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="404.html">404 Error</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Features</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="typography.html">Typography</a></li>
-                                    <li><a href="grid-system.html">Grid System</a></li>
-                                    <li><a href="elements.html">Elements</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">Menu Title</li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">More..</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">3rd level</a></li>
-                                            <li><a href="#">3rd level</a></li>
-                                        </ul>
-                                    </li>
-
-                                </ul>
-                            </li>
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="portfolio-single.html">Single Project</a></li>
-                                    <li><a href="portfolio-2cl.html">2 Columns Portfolio</a></li>
-                                    <li><a href="portfolio-3cl.html">3 Columns Portfolio</a></li>
-                                    <li><a href="portfolio-4cl.html">4 Columns Portfolio</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="blog-single.html">Single Article</a></li>
-                                    <li><a href="blog-grid-2cl.html">Blog Grid 2 Columns</a></li>
-                                    <li><a href="blog-grid-3cl.html">Blog Grid 3 Columns</a></li>
-                                    <li><a href="blog-list.html">Blog List</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="shop-product.html">Product</a></li>
-                                    <li><a href="shop-product-sidebar-left.html">Product Sidebar Left</a></li>
-                                    <li><a href="shop-product-sidebar-right.html">Product Sidebar Right</a></li>
-                                    <li><a href="shop-catalog.html">Catalog</a></li>
-                                    <li><a href="shop-catalog-sidebar-left.html">Catalog Sidebar Left</a></li>
-                                    <li><a href="shop-catalog-sidebar-right.html">Catalog Sidebar Right</a></li>
-                                    <li><a href="shop-cart.html">Shopping Cart</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact Us</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="contactus-1.html">Contact Us 1</a></li>
-                                    <li><a href="contactus-2.html">Contact Us 2</a></li>
-                                    <li><a href="contactus-3.html">Contact Us 3</a></li>
-                                    <li><a href="contactus-4.html">Contact Us 4</a></li>
-                                </ul>
-                            </li>
-
-                            <li><a href="shop-cart.html"><i class="fa fa-shopping-cart fa-fw"></i> Cart (2)</a></li>
+                            <li><a asp-controller="Product" asp-action="List"><i class="fa fa-list fa-fw"></i> Products</a></li>
 
 
+                            <li><a asp-controller="Cart" asp-action="Index"><i class="fa fa-shopping-cart fa-fw"></i> Cart (@await Component.InvokeAsync("CartSummary") )</a></li>
                         </ul>
-
-
-
                     </div><!--/.nav-collapse -->
                 </div>
             </nav>
@@ -143,33 +54,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-6">
-                        <h1>Shop <small>Catalog</small></h1>
+                        <h1>Shopping</h1>
                     </div>
-                    
+
                 </div>
             </div>
         </section>
         <!-- PAGE TITLE END -->
         <!-- CONTENT START -->
-            @RenderBody()
+        @RenderBody()
         <!-- CONTENT END -->
         <!-- FOOTER START -->
-        <section id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center bottom">
-                        <ul class="list-unstyled list-inline social-icons">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook facebook"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter twitter"></i></a></li>
-                            <li><a href="#" class="googleplus"><i class="fa fa-google-plus googleplus"></i></a></li>
-                            <li><a href="#" class="youtube"><i class="fa fa-youtube youtube"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin linkedin"></i></a></li>
-                        </ul>
-                        <p>Copyright &copy; 2021 Serhat. All rights reserved.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <partial name="_PageFooter" />
         <!-- FOOTER END -->
     </div>
     <!-- WRAPPER END -->
@@ -195,18 +91,6 @@
     </script>
     <!-- STYLE SWITCHER -->
     <script src="demo/demo.js"></script>
-    <div id="styleswitcher">
-        <input id="settings-btn" class="settings-btn" type="checkbox">
-        <label for="settings-btn" class="settings-box-element"><i class="fa fa-2x fa-gear"></i></label>
-        <div class="buttons-wrapper settings-box-element">
-            <h4 class="text-uppercase">Change Color Style</h4>
-            <p><button id="demo-lunar" class="btn demo-btn demo-lunar">Lunar (Default)</button></p>
-            <p><button id="demo-blue" class="btn demo-btn demo-blue">Blue</button></p>
-            <p><button id="demo-green" class="btn demo-btn demo-green">Green</button></p>
-            <p><button id="demo-red" class="btn demo-btn demo-red">Red</button></p>
-            <p><button id="demo-orange" class="btn demo-btn demo-orange">Orange</button></p>
-        </div>
-    </div>
-
+    <script src="~/lib/jquery/dist/jquery.js"></script>
 </body>
 </html>

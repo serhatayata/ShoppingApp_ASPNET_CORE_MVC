@@ -16,7 +16,7 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
     {
         private readonly ShoppingAppContext context;
 
-        public EfCategoryRepository(ShoppingAppContext _context)
+        public EfCategoryRepository(ShoppingAppContext _context):base(_context)
         {
             context = _context;
         }

@@ -32,10 +32,6 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
             }
         }
 
-        public void Dispose()
-        {
-            context.Dispose();
-        }
 
         public int SaveChanges()
         {

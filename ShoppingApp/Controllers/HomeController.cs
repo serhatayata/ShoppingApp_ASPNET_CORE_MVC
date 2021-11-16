@@ -22,7 +22,7 @@ namespace ShoppingApp.Controllers
         }
         public IActionResult Index()
         {
-            return View(uowRepository.Products.GetAll().Where(x=>x.isApproved && x.isHome).ToList());
+            return View(uowRepository.Products.GetAll().Where(x=>x.IsApproved && x.IsHome));
         }
         public IActionResult Details(int id)
         {

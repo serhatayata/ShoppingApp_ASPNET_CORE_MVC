@@ -1,0 +1,25 @@
+﻿@model Product
+
+<div class="col-md-4 wow fadeInUp">
+    <div class="text-center product-item">
+        <div class="product-item-top">
+            <img alt="" class="img-responsive" src="~/images/products/tn/@Model.Image">
+            <div class="mask"></div>
+            <ul class="list-unstyled list-inline">
+                <li><a asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductID"><i class="fa fa-desktop fa-fw"></i></a></li>
+                <li>
+                    <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="productId" value="@Model.ProductID" />
+                        <input type="hidden" name="isHome" value=true />
+                        <button type="submit"><i class="fa fa-cart-plus fa-fw"></i></button>
+                    </form>
+                </li>
+
+            </ul>
+        </div>
+        <div class="product-item-inner">
+            <h3 class="product-title"><a asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductID">@Model.ProductName</a></h3>
+            <p class="product-price">@Model.Price.ToString("c")</p>
+        </div> 
+    </div>
+</div>

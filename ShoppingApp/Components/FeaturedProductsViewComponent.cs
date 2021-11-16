@@ -17,7 +17,7 @@ namespace ShoppingApp.Components
 
         public IViewComponentResult Invoke()
         {
-           return  View(repository.GetAll().Where(x=>x.isApproved && x.isFeatured==true).ToList());
+           return  View(repository.GetAll().Where(x=>x.IsApproved && x.IsFeatured==true).ToList());
         }
 
     }
