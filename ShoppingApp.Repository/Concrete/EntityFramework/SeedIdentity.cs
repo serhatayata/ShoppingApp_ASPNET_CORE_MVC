@@ -30,7 +30,7 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
 
                 ApplicationUser user = new ApplicationUser()
                 {
-                    UserName = username,
+                    UserName=username,
                     Email = email,
                     Name = "Serhat",
                     Surname = "Ayata"

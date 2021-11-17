@@ -28,6 +28,25 @@ namespace ShoppingApp.Entity.Entities
                 prd.Quantity += quantity;
             }
         }
+
+        public void UpdateProduct(Product product, int quantity)
+        {
+            var prd = products.Where(i => i.Product.ProductID == product.ProductID).FirstOrDefault();
+
+            if (prd == null)
+            {
+                products.Add(new CartLine()
+                {
+                    Product = product,
+                    Quantity = quantity
+                });
+            }
+            else
+            {
+                prd.Quantity = quantity;
+            }
+        }
+
         public void RemoveProduct(Product product)
         {
             products.RemoveAll(i => i.Product.ProductID == product.ProductID);
@@ -47,8 +66,7 @@ namespace ShoppingApp.Entity.Entities
     public class CartLine
     {
         public int CartLineID { get; set; }
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
         public int Quantity { get; set; }
-        public int MyProperty { get; set; }
     }
 }

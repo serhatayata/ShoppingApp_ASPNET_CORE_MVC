@@ -10,6 +10,7 @@ namespace ShoppingApp.Repository.Abstract
     {
         IProductRepository Products { get; }
         ICategoryRepository Categories { get; }
+        IOrderRepository Orders { get; }
         int SaveChanges();
     }
 }

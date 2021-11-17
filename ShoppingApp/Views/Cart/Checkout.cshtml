@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model OrderDetails
+
+<section id="content">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="padding25">
+                    <h4>Please enter your information.</h4>
+                </div>
+                <div class="text-danger" asp-validation-summary="All">
+
+                </div>
+                <form asp-controller="Cart" asp-action="Checkout" method="post">
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <input asp-for="AddressTitle" class="form-control input-lg" placeholder="Address Title">
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <input asp-for="Address" class="form-control input-lg" placeholder="Address">
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <input asp-for="City" class="form-control input-lg" placeholder="City">
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <input asp-for="Neighborhood" class="form-control input-lg" placeholder="Neighborhood">
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <input asp-for="Phone" class="form-control input-lg" placeholder="Phone">
+                        </div>
+                        <div class="form-group col-xs-12 text-left">
+                            <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-send fa-fw"></i> Complete the order</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</section>

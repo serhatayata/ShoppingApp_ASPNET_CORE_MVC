@@ -41,8 +41,22 @@
 
                             <li><a asp-controller="Product" asp-action="List"><i class="fa fa-list fa-fw"></i> Products</a></li>
 
-
                             <li><a asp-controller="Cart" asp-action="Index"><i class="fa fa-shopping-cart fa-fw"></i> Cart (@await Component.InvokeAsync("CartSummary") )</a></li>
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Profile</a></li>
+                                        <li><a href="/Account/Logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                             }
+                            else
+                            {
+                                 <li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user-md"></i> Login</a></li>
+                            }
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -62,7 +76,10 @@
         </section>
         <!-- PAGE TITLE END -->
         <!-- CONTENT START -->
-        @RenderBody()
+        <div style="min-height:80vh">
+            @RenderBody()
+        </div>
+
         <!-- CONTENT END -->
         <!-- FOOTER START -->
         <partial name="_PageFooter" />

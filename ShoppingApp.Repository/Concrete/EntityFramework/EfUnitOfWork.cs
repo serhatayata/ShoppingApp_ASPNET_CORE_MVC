@@ -16,6 +16,7 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
         }
         private IProductRepository _products;
         private ICategoryRepository _categories;
+        private IOrderRepository _orders;
         public IProductRepository Products
         {
             get
@@ -32,6 +33,13 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
             }
         }
 
+        public IOrderRepository Orders
+        {
+            get
+            {
+                return _orders ?? (_orders = new EfOrderRepository(context));
+            }
+        }
 
         public int SaveChanges()
         {

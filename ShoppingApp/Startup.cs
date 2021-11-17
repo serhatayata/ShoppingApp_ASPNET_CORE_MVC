@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 using ShoppingApp.Repository.Abstract;
 using ShoppingApp.Repository.Concrete.EntityFramework;
 using System;
@@ -35,10 +36,10 @@ namespace ShoppingApp
             services.AddTransient<IUnitOfWork, EfUnitOfWork>();
             services.AddControllersWithViews();
             services.AddMvc(options => options.EnableEndpointRouting = false);
-
             services.AddMemoryCache();
             services.AddSession();
-            
+            services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +78,7 @@ namespace ShoppingApp
 
             SeedData.EnsurePopulated(app);
 
+            SeedIdentity.CreateIdentityUsers(app.ApplicationServices,Configuration).Wait();
         }
     }
 }
