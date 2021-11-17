@@ -1,14 +1,5 @@
 [
   {
-    "outputFileName": "wwwroot/css/bundle.css",
-    "inputFiles": [
-      "wwwroot/edura/style.css",
-      "wwwroot/edura/styles/lunar.css",
-      "wwwroot/edura/custom.css",
-      "wwwroot/edura/demo/demo.css"
-    ]
-  },
-  {
     "outputFileName": "wwwroot/js/bundle.js",
     "inputFiles": [
       "wwwroot/edura/vendor/jquery/jquery.min.js",

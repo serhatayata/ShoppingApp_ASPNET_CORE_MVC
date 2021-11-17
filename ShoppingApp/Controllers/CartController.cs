@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShoppingApp.Entity.Entities;
 using ShoppingApp.Infrastructure;
 using ShoppingApp.Repository.Abstract;
@@ -11,10 +12,10 @@ namespace ShoppingApp.Controllers
 {
     public class CartController : Controller
     {
-        private IProductRepository proRepository;
-        public CartController(IProductRepository _proRepository)
+        private IUnitOfWork unitofWork;
+        public CartController(IUnitOfWork _unitofWork)
         {
-            proRepository = _proRepository;
+            unitofWork = _unitofWork;
         }
 
 
@@ -25,7 +26,7 @@ namespace ShoppingApp.Controllers
         [HttpPost]
         public IActionResult AddToCart(int productId, int quantity = 1, bool isHome = false)
         {
-            var product = proRepository.Get(productId);
+            var product = unitofWork.Products.Get(productId);
             if (product != null)
             {
                 var cart = GetCart();
@@ -46,7 +47,7 @@ namespace ShoppingApp.Controllers
         [HttpPost]
         public IActionResult UpdateCart(int productId, int quantity = 1, bool isHome = false)
         {
-            var product = proRepository.Get(productId);
+            var product = unitofWork.Products.Get(productId);
             if (product != null)
             {
                 var cart = GetCart();
@@ -66,7 +67,7 @@ namespace ShoppingApp.Controllers
         }
         public IActionResult RemoveFromCart(int ProductId)
         {
-            var product = proRepository.Get(ProductId);
+            var product = unitofWork.Products.Get(ProductId);
             if (product != null)
             {
                 var cart = GetCart();
@@ -84,12 +85,17 @@ namespace ShoppingApp.Controllers
         {
             return HttpContext.Session.GetJSON<Cart>("Cart") ?? new Cart();
         }
+        [Authorize]
         [HttpGet]
         public IActionResult Checkout()
         {
+            var cart = GetCart();
+            var cartNeeded = cart.Products;
+            ViewBag.cart = cartNeeded;
             return View();
         }
         [HttpPost]
+        [Authorize]
         public IActionResult Checkout(OrderDetails model)
         {
             var cart = GetCart();
@@ -101,6 +107,7 @@ namespace ShoppingApp.Controllers
             {
                 SaveOrder(cart, model);
                 cart.ClearAll();
+                SaveCart(cart);
                 return View("Completed");
             }
             return View(model);
@@ -132,7 +139,8 @@ namespace ShoppingApp.Controllers
                 };
                 order.OrderLines.Add(orderline);
             }
-
+            unitofWork.Orders.Add(order);
+            unitofWork.SaveChanges();
 
         }
     }

@@ -11,7 +11,7 @@
 
         <div class="row">
 
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="padding25">
                     <h4>Please enter your information.</h4>
                 </div>
@@ -36,15 +36,39 @@
                             <input asp-for="Phone" class="form-control input-lg" placeholder="Phone">
                         </div>
                         <div class="form-group col-xs-12 text-left">
-                            <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-send fa-fw"></i> Complete the order</button>
+                            <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-check-circle fa-fw"></i> Complete the order</button>
                         </div>
                     </div>
                 </form>
 
             </div>
+            <div class="col-md-1">
+                <span class="hidden">SPACE</span>
+            </div>
+            <div class="col-md-5">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th class="qtycolumn">Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
 
-            <div class="col-md-4">
-
+                    <tbody>
+                        @foreach (var item in (List<CartLine>)ViewBag.cart)
+                        {
+                        <tr>
+                            <td>@item.Product.ProductName</td>
+                            <td>@item.Product.Price</td>
+                            <td>@item.Quantity</td>
+                            <td>@((item.Product.Price*item.Quantity).ToString("c"))</td>
+                        </tr>
+                        }
+                            
+                    </tbody>
+                </table>
             </div>
 
         </div>

@@ -2,117 +2,125 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/css/w3Css.css" rel="stylesheet" />
 @model ProductDetailsModel
 
-<section id="content">
 
-    <!-- shop section start -->
-    <section id="shop" class="container">
+    <section id="content">
 
-        <!-- row start -->
-        <div class="row">
-            <!-- sidebar start -->
-            <div id="sidebar" class="col-md-3">
-                <!-- search widget start -->
-                @await Component.InvokeAsync("Search")
-                <!-- search widget end -->
-                @await Component.InvokeAsync("CategoryMenu")
+        <!-- shop section start -->
+        <section id="shop" class="container">
 
-                @await Component.InvokeAsync("FeaturedProducts")
-            </div>
-            <!-- sidebar end -->
-            <!-- main column start -->
-            <div class="col-md-9">
-                <div class="row">
-                    <!-- product page top info start -->
-                    <div class="col-md-12 product">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div id="product-gallery" class="owl-carousel">
-                                    @foreach (var item in Model.ProductImages)
-                                    {
-                                        <div>
-                                            <img alt="" class="img-responsive" src="~/images/products/@item.ImageName">
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                            <div class="col-md-6">
+            <!-- row start -->
+            <div class="row">
+                <!-- sidebar start -->
+                <div id="sidebar" class="col-md-3">
+                    <!-- search widget start -->
+                    @await Component.InvokeAsync("Search")
+                    <!-- search widget end -->
+                    @await Component.InvokeAsync("CategoryMenu")
 
-                                <div class="padding15">
-                                    <h2 class="product-title"><b>@Model.Product.ProductName</b></h2>
-                                    <p class="product-price">@Model.Product.Price.ToString("c")</p>
-                                </div>
-                                <p>@Model.Product.Description</p>
-
-                                <div class="padding15">
-
-                                    <form asp-action="AddToCart" asp-controller="Cart" method="post" class="form-inline">
-                                        <input type="hidden" name="productId" value="@Model.Product.ProductID" />
-                                        <div class="form-group qty">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Qty</span>
-                                                <input type="number" size="4" class="form-control" name="quantity" value="1" min="1" step="1">
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary"><i class="fa fa-cart-plus fa-fw"></i>Sepete Ekle</button>
-                                    </form>
-
-                                </div>
-
-                                <p><b>Category:</b> 
-                                @foreach (var item in Model.Categories)
-	                            {
-                                   <a href="#">@item.CategoryName</a>
-                                    if (item != Model.Categories[Model.Categories.Count-1])
-                                    {
-                                        <span>,</span>
-                                    }
-                                }
-                                </p>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- product page top info end -->
-                    <!-- product page middle info start -->
-                    <div class="col-md-12 padding25">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#description">Description</a></li>
-                            <li><a data-toggle="tab" href="#spec">Specifications</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <!-- description tab start -->
-                            <div id="description" class="tab-pane fade in active">
-                                <p>@Html.Raw(Model.Product.HtmlContent)</p> 
-                            </div>
-                            <!-- description tab end -->
-                            <!-- Specifications tab start -->
-                            <div id="spec" class="tab-pane fade">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
-                                        @foreach (var item in Model.ProductAttributes)
-	                                    {
-                                        <tr>
-                                            <td><b>@item.Attribute</b></td>
-                                            <td>@item.Value</td>
-                                        </tr>
-	                                    }
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- Specifications tab end -->
-                        </div>
-                    </div>
-                    <!-- product page middle info end -->
+                    @await Component.InvokeAsync("FeaturedProducts")
                 </div>
-                <!-- row end -->
+                <!-- sidebar end -->
+                <!-- main column start -->
+                <div class="col-md-9">
+                    <div class="row">
+
+                        <!-- product page top info start -->
+                        <div class="col-md-12 product">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="w3-content w3-display-container">
+
+                                        @foreach (var img in Model.ProductImages)
+                                        {
+                                            <div class="item mySlides">
+                                                <img alt="" class="img-responsive" src="/images/products/@img.ImageName" />
+                                            </div>
+                                        }
+                                        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                                        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="padding15">
+                                        <h2 class="product-title"><b>@Model.Product.ProductName</b></h2>
+                                        <p class="product-price">@Model.Product.Price.ToString("c")</p>
+                                    </div>
+                                    <p>@Model.Product.Description</p>
+
+                                    <div class="padding15">
+
+                                        <form asp-action="AddToCart" asp-controller="Cart" method="post" class="form-inline">
+                                            <input type="hidden" name="productId" value="@Model.Product.ProductID" />
+                                            <div class="form-group qty">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Qty</span>
+                                                    <input type="number" size="4" class="form-control" name="quantity" value="1" min="1" step="1">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-cart-plus fa-fw"></i>Sepete Ekle</button>
+                                        </form>
+
+                                    </div>
+
+                                    <p>
+                                        <b>Category:</b>
+                                        @foreach (var item in Model.Categories)
+                                        {
+                                            <a href="#">@item.CategoryName</a>
+                                            if (item != Model.Categories[Model.Categories.Count - 1])
+                                            {
+                                                <span>,</span>
+                                            }
+                                        }
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- product page top info end -->
+                        <!-- product page middle info start -->
+                        <div class="col-md-12 padding25">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#description">Description</a></li>
+                                <li><a data-toggle="tab" href="#spec">Specifications</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <!-- description tab start -->
+                                <div id="description" class="tab-pane fade in active">
+                                    <p>@Html.Raw(Model.Product.HtmlContent)</p>
+                                </div>
+                                <!-- description tab end -->
+                                <!-- Specifications tab start -->
+                                <div id="spec" class="tab-pane fade">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            @foreach (var item in Model.ProductAttributes)
+                                            {
+                                                <tr>
+                                                    <td><b>@item.Attribute</b></td>
+                                                    <td>@item.Value</td>
+                                                </tr>
+                                            }
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- Specifications tab end -->
+                            </div>
+                        </div>
+                        <!-- product page middle info end -->
+                    </div>
+                    <!-- row end -->
+                </div>
+                <!-- main column end -->
             </div>
-            <!-- main column end -->
-        </div>
-        <!-- row end -->
+            <!-- row end -->
+        </section>
+        <!-- shop section end -->
     </section>
-    <!-- shop section end -->
-</section>

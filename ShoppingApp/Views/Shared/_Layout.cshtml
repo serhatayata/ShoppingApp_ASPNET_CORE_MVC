@@ -17,7 +17,7 @@
     <link href="~/AllFiles/demo/demo.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Zen+Kaku+Gothic+Antique&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Zen+Kaku+Gothic+Antique&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -45,18 +45,16 @@
 
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Profile</a></li>
-                                        <li><a href="/Account/Logout">Logout</a></li>
-                                    </ul>
-                                </li>
-                             }
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="/Account/Logout">Logout</a></li>
+                    </ul>
+                </li> }
                             else
                             {
-                                 <li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user-md"></i> Login</a></li>
-                            }
+                <li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user-md"></i> Login</a></li>}
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -106,8 +104,8 @@
         ga('send', 'pageview');
 
     </script>
-    <!-- STYLE SWITCHER -->
     <script src="demo/demo.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/SlidingImages.js"></script>
 </body>
 </html>
