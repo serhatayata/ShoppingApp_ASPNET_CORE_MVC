@@ -13,6 +13,7 @@ namespace ShoppingApp.Entity.Entities
     {
         [Key]
         public int ProductID { get; set; }
+        [Required]
         public string ProductName { get; set; }
         public double Price { get; set; }
         public string Image { get; set; }

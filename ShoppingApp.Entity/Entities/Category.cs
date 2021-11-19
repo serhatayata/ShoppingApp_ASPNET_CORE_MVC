@@ -13,6 +13,7 @@ namespace ShoppingApp.Entity.Entities
     {
         [Key]
         public int CategoryID { get; set; }
+        [Required]
         public string CategoryName { get; set; }
         public virtual List<ProductCategory> ProductCategories { get; set; }
     }

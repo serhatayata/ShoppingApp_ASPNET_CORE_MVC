@@ -78,7 +78,5 @@ namespace ShoppingApp.Infrastructure
 
             output.Content.AppendHtml(result.InnerHtml);
         }
-
-
     }
 }

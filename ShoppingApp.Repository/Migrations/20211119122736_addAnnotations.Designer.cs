@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoppingApp.Repository.Concrete.EntityFramework;
 
 namespace ShoppingApp.Repository.Migrations
 {
     [DbContext(typeof(ShoppingAppContext))]
-    partial class ShoppingAppContextModelSnapshot : ModelSnapshot
+    [Migration("20211119122736_addAnnotations")]
+    partial class addAnnotations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

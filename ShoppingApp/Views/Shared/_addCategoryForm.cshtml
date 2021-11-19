@@ -1,0 +1,28 @@
+﻿@model Category
+
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="addCategory" asp-controller="Admin" asp-action="AddCategory">
+                @Html.AntiForgeryToken()
+
+                <div class="modal-body">
+                    <div class="text-danger" asp-validation-summary="All">
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CategoryName"></label>
+                        <input asp-for="CategoryName" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <img id="ajax-loader" style="display:none; width:30px; height:30px" src="~/images/ajax-loader.gif" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>

@@ -56,14 +56,7 @@ namespace ShoppingApp.Controllers
 
                 SaveCart(cart);
             }
-            if (isHome)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+            return Ok(product);
         }
         public IActionResult RemoveFromCart(int ProductId)
         {
