@@ -49,7 +49,7 @@
 
                                 <a href="#" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" asp-action="Index" asp-controller="User">Profile</a></li>
                                     <li><a class="dropdown-item" href="/Account/Logout">Logout</a></li>
                                 </ul>
                             </li> 

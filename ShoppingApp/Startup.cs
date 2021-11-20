@@ -52,7 +52,7 @@ namespace ShoppingApp
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error"); 
+                app.UseExceptionHandler("Errors/Error1"); 
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
