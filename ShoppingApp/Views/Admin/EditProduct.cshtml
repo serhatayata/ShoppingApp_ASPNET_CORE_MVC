@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "EditProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model Product
+
+<div class="card">
+    <div class="card-header">
+        <h4>Update : @Model.ProductName</h4>
+    </div>
+    <form asp-controller="Admin" asp-action="EditProduct" method="post" enctype="multipart/form-data">
+        <div class="card-body mb-2">
+            <div class="text-danger" asp-validation-summary="All">
+
+            </div>
+            <input type="hidden" asp-for="ProductID" />
+            <input type="hidden" asp-for="Image" />
+            <input type="hidden" asp-for="DateAdded" />
+            <div class="form-group">
+                <label class="m-2">Name</label>
+                <input asp-for="ProductName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="m-2">Price</label>
+                <input asp-for="Price" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="mt-4 m-2">Is Approved</label>
+                <input asp-for="IsApproved" type="checkbox" />
+            </div>
+            <div class="form-group">
+                <label class="m-2">Is Home</label>
+                <input asp-for="IsHome" type="checkbox" />
+            </div>
+            <div class="form-group">
+                <label class="m-2">Is Featured</label>
+                <input asp-for="IsFeatured" type="checkbox" />
+            </div>
+            <div class="form-group">
+                <label class="m-2">Description</label>
+                <textarea asp-for="Description" rows="5" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="m-2">Html Content</label>
+                <textarea asp-for="HtmlContent" rows="5" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('HtmlContent');
+</script>
+

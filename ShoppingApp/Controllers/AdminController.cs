@@ -20,10 +20,6 @@ namespace ShoppingApp.Controllers
         {
             unitOfWork = _unitOfWork;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public IActionResult CatalogList()
         {
@@ -34,6 +30,7 @@ namespace ShoppingApp.Controllers
             };
             return View(model);
         } 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddCategory(Category entity)
@@ -82,6 +79,15 @@ namespace ShoppingApp.Controllers
             return RedirectToAction("EditCategory",entity.CategoryID);
         }
 
+        public IActionResult DeleteCategory(int id)
+        {
+            var ct = unitOfWork.Categories.Get(id);
+            unitOfWork.Categories.Delete(ct);
+            unitOfWork.SaveChanges();
+            return RedirectToAction("CatalogList","Admin");
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult RemoveFromCategory(int CategoryID,int ProductID)
@@ -128,6 +134,29 @@ namespace ShoppingApp.Controllers
                 return RedirectToAction("CatalogList","Admin");
             }
             return View(entity);
+        }
+
+
+        [HttpGet]
+        public IActionResult EditProduct(int id)
+        {
+            var prod = unitOfWork.Products.Get(id);
+            return View(prod);
+        }
+        [HttpPost]
+        public IActionResult EditProduct(Product product)
+        {
+            unitOfWork.Products.Edit(product);
+            unitOfWork.SaveChanges();
+            return RedirectToAction("CatalogList", "Admin");
+        }
+
+        public IActionResult DeleteProduct(int id)
+        {
+            var prod = unitOfWork.Products.Get(id);
+            unitOfWork.Products.Delete(prod);
+            unitOfWork.SaveChanges();
+            return RedirectToAction("CatalogList", "Admin");
         }
 
 

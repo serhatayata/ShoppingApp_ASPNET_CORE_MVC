@@ -33,7 +33,7 @@
                         <a class="btn btn-primary btn-sm form-control" asp-controller="Admin" asp-action="EditCategory" asp-route-id="@item.CategoryID">Edit</a>
                     </td>
                     <td>
-                        <button class="btn btn-danger form-control btn-sm">Delete</button>
+                        <a class="btn btn-danger form-control btn-sm" asp-controller="Admin" asp-action="DeleteCategory" asp-route-id="@item.CategoryID">Delete</a>
                     </td>
                 </tr>
             }
@@ -106,10 +106,10 @@
 
                     </td>
                     <td>
-                        <button class="btn btn-primary form-control btn-sm">Edit</button>
+                        <a class="btn btn-primary form-control btn-sm" asp-action="EditProduct" asp-controller="Admin" asp-route-id="@item.ProductID">Edit</a>
                     </td>
                     <td>
-                        <button class="btn btn-danger form-control btn-sm">Delete</button>
+                        <a class="btn btn-danger form-control btn-sm" asp-controller="Admin" asp-action="DeleteProduct" asp-route-id="@item.ProductID">Delete</a>
                     </td>
                 </tr>
                 }

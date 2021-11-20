@@ -22,9 +22,13 @@ namespace ShoppingApp.Controllers
         {
             return View();
         }
-        public IActionResult List(string category,int page=1)
+        public IActionResult List(string category,string prd="",int page=1)
         {
-            var products = proRepository.GetAll();
+            if (prd==null)
+            {
+                prd = "";
+            }
+            var products = proRepository.GetAll().Where(x=>x.ProductName.Contains(prd));
             if (!string.IsNullOrEmpty(category))
             {
                 products = products.Include(x => x.ProductCategories)
@@ -45,7 +49,6 @@ namespace ShoppingApp.Controllers
                     }
                 });
         }
-
         [HttpGet]
         public IActionResult Details(int id)
         {
