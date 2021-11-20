@@ -78,7 +78,7 @@ namespace ShoppingApp.Controllers
         {
             return HttpContext.Session.GetJSON<Cart>("Cart") ?? new Cart();
         }
-        [Authorize]
+        [Authorize(Roles ="user")]
         [HttpGet]
         public IActionResult Checkout()
         {
@@ -88,7 +88,7 @@ namespace ShoppingApp.Controllers
             return View();
         }
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "user")]
         public IActionResult Checkout(OrderDetails model)
         {
             var cart = GetCart();

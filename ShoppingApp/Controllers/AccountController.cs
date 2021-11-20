@@ -15,11 +15,13 @@ namespace ShoppingApp.Controllers
     {
         private UserManager<ApplicationUser> userManager;
         private SignInManager<ApplicationUser> signInManager;
+        private RoleManager<IdentityRole> roleManager;
 
-        public AccountController(UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager)
+        public AccountController(UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager, RoleManager<IdentityRole> _roleManager)
         {
             userManager = _userManager;
             signInManager = _signInManager;
+            roleManager = _roleManager;
         }
 
         [AllowAnonymous]
@@ -37,13 +39,19 @@ namespace ShoppingApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = await userManager.FindByEmailAsync(model.Email);
+                var roles = await userManager.GetRolesAsync(user);
+
                 if (user != null)
                 {
                     await signInManager.SignOutAsync();
                     var result = await signInManager.PasswordSignInAsync(user,model.Password,false,false);
-                    if (result.Succeeded)
+                    if (result.Succeeded && roles[0]=="user")
                     {
                         return Redirect(returnUrl ?? "/");
+                    }
+                    else if (result.Succeeded && roles[0]=="admin")
+                    {
+                        return Redirect(returnUrl ?? "/Admin/CatalogList");
                     }
                 }
                 ModelState.AddModelError(nameof(model.Email), "Hatalı E-mail veya Parola");

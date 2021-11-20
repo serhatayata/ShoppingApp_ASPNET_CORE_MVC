@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingApp.Controllers
 {
-    //[Authorize(Roles ="admin")]
+    [Authorize(Roles ="admin")]
     public class AdminController : Controller
     {
         private IUnitOfWork unitOfWork;

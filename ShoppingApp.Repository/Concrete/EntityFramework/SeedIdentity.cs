@@ -21,6 +21,11 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
             var password = configuration["Data:AdminUser:password"];
             var role = configuration["Data:AdminUser:role"];
 
+            var Nusername = configuration["Data:User:username"];
+            var Nemail = configuration["Data:User:email"];
+            var Npassword = configuration["Data:User:password"];
+            var Nrole = configuration["Data:User:role"];
+
             if (await userManager.FindByNameAsync(username) == null)
             {
                 if (await roleManager.FindByNameAsync(role) == null)
@@ -35,11 +40,34 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
                     Name = "Serhat",
                     Surname = "Ayata"
                 };
+                
                 IdentityResult result = await userManager.CreateAsync(user,password);
 
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(user, role);
+                }
+            }
+            if (await userManager.FindByNameAsync(Nusername) == null)
+            {
+                if (await roleManager.FindByNameAsync(Nrole) == null)
+                {
+                    await roleManager.CreateAsync(new IdentityRole(Nrole));
+                }
+
+                ApplicationUser user2 = new ApplicationUser()
+                {
+                    UserName = Nusername,
+                    Email = Nemail,
+                    Name = "Serhat",
+                    Surname = "Ayata"
+                };
+
+                IdentityResult result2 = await userManager.CreateAsync(user2, Npassword);
+
+                if (result2.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user2,Nrole);
                 }
             }
         }

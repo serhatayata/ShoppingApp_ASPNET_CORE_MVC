@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class OrderController : Controller
     {
         public IActionResult Index()
