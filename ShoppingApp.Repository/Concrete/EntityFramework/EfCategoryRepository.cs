@@ -20,6 +20,10 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
         {
             context = _context;
         }
+        public ShoppingAppContext ShoppingAppContext
+        {
+            get { return context as ShoppingAppContext; }
+        }
 
         public IEnumerable<CategoryModel> GetAllWithProductCount()
         { 
@@ -37,8 +41,11 @@ namespace ShoppingApp.Repository.Concrete.EntityFramework
             return context.Categories.Where(x => x.CategoryName == name).FirstOrDefault();
         }
 
+        public void RemoveFromCategory(int CategoryID, int ProductID)
+        {
+            var cmd = $"delete from ProductCategory where ProductID={ProductID} and CategoryID={CategoryID}";
 
-
-
+             context.Database.ExecuteSqlRaw(cmd);
+        }
     }
 }

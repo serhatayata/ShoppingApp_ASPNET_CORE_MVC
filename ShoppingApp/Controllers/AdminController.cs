@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShoppingApp.Entity.Entities;
 using ShoppingApp.Repository.Abstract;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingApp.Controllers
 {
+    //[Authorize(Roles ="admin")]
     public class AdminController : Controller
     {
         private IUnitOfWork unitOfWork;
@@ -31,7 +33,7 @@ namespace ShoppingApp.Controllers
                 Products = unitOfWork.Products.GetAll().ToList()
             };
             return View(model);
-        }
+        } 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddCategory(Category entity)
@@ -45,6 +47,54 @@ namespace ShoppingApp.Controllers
             }
             return BadRequest();
         }
+        [HttpGet]
+        public IActionResult EditCategory(int id)
+        {
+            var entity = unitOfWork.Categories.GetAll()
+                       .Include(x => x.ProductCategories).ThenInclude(y => y.Product)
+                       .Where(a => a.CategoryID == id)
+                       .Select(x => new AdminEditCategoryModel()
+                       {
+                           CategoryID = x.CategoryID,
+                           CategoryName = x.CategoryName,
+                           Products = x.ProductCategories.Select(a => new AdminEditCategoryProduct()
+                           {
+                               ProductID = a.ProductID,
+                               ProductName = a.Product.ProductName,
+                               Image = a.Product.Image,
+                               IsApproved = a.Product.IsApproved,
+                               IsFeatured = a.Product.IsFeatured,
+                               IsHome = a.Product.IsHome
+                           }).ToList()
+                       }).FirstOrDefault();
+            return View(entity);
+        }
+        [HttpPost]
+        public IActionResult EditCategory(Category entity)
+        {
+            if (ModelState.IsValid)
+            {
+                unitOfWork.Categories.Edit(entity);
+                unitOfWork.SaveChanges();
+
+                return RedirectToAction("CatalogList");
+            }
+            return RedirectToAction("EditCategory",entity.CategoryID);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemoveFromCategory(int CategoryID,int ProductID)
+        {
+            if (ModelState.IsValid)
+            {
+                unitOfWork.Categories.RemoveFromCategory(CategoryID, ProductID);
+                unitOfWork.SaveChanges();
+                return Ok();
+            }
+            return BadRequest();
+        }
+         
         [HttpGet]
         public IActionResult AddProduct()
         {

@@ -30,7 +30,7 @@
                     <td>@i</td>
                     <td>@item.CategoryName</td>
                     <td>
-                        <button class="btn form-control btn-primary btn-sm">Edit</button>
+                        <a class="btn btn-primary btn-sm form-control" asp-controller="Admin" asp-action="EditCategory" asp-route-id="@item.CategoryID">Edit</a>
                     </td>
                     <td>
                         <button class="btn btn-danger form-control btn-sm">Delete</button>
