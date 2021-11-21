@@ -58,6 +58,37 @@ namespace ShoppingApp.Controllers
             }
             return View(model);
         }
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Register(ApplicationUser user, string password)
+        {
+            if (await userManager.FindByNameAsync(user.UserName) == null)
+            {
+                string role = "user";
+
+                ApplicationUser _user = new ApplicationUser()
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Name = user.Name,
+                    Surname = user.Surname
+                };
+
+                IdentityResult result = await userManager.CreateAsync(user, password);
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, role);
+                }
+            }
+            return RedirectToAction("Login","Account");
+        }
 
         public async Task<IActionResult> Logout()
         {

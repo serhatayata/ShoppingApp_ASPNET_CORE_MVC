@@ -16,43 +16,47 @@
             </div><hr /><br />
         </div>
         <div class="col-lg-8" style="margin-top:30px">
-            
-                <table class="table table-bordered table-striped"">
-                    <thead>
+
+            <table class="table table-bordered table-striped" ">
+                <thead>
+                    <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th scope="col">Order ID</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">City</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Status</th>
+                            <th>@item.OrderID</th>
+                            <td>@item.OrderLines.Where(x => x.OrderID == item.OrderID).Count()</td>
+                            <td>@item.OrderDate</td>
+                            <td>@item.City</td>
+                            <td>@item.Phone</td>
+                            <td>@item.Total</td>
+                            <td>
+                                @if (item.OrderState == EnumOrderState.Waiting)
+                                {
+                                    <i class="fas fa-truck-moving fa-3x"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-check fa-3x"></i>
+                                }
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <th>@item.OrderID</th>
-                                <td>@item.OrderLines.Where(x => x.OrderID == item.OrderID).Count()</td>
-                                <td>@item.OrderDate</td>
-                                <td>@item.City</td>
-                                <td>@item.Phone</td>
-                                <td>@item.Total</td>
-                                <td>
-                                    @if (item.OrderState == EnumOrderState.Waiting)
-                                    {
-                                        <i class="fas fa-truck-moving fa-3x"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fas fa-check fa-3x"></i>
-                                    }
-                                </td>
-                            </tr>
-                        }
-                        </tbody>
-                </table>
+                    }
+                </tbody>
+            </table>
+            @if (Model.Count() == 0)
+            {
+                <h3 class="text-center">There is no order.</h3>
+            }
         </div>
     </div>
 </div>

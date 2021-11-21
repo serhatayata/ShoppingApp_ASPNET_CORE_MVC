@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ApplicationUser
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 margin25">
+            <form asp-action="Register" asp-controller="Account" method="post">
+                <div class="form-group text-danger" asp-validation-summary="All">
+
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Surname</label>
+                    <input asp-for="Surname" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input asp-for="UserName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" id="password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">
+                        Register
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-1">
+
+        </div>
+        <div class="col-lg-3 text-center margin15">
+            <div class="padding25">
+                <h4>Welcome to <b>Shopping World</b></h4>
+            </div>
+            <div class="padding25 d-flex justify-content-between align-items-center">
+                <i class="fas fa-globe fa-5x text-info"></i><i class="fas fa-shopping-cart fa-5x text-success"></i>
+            </div>
+            <div class="padding25 d-flex justify-content-between align-items-center">
+                <i class="fas fa-tshirt fa-5x text-danger"></i><i class="fas fa-gifts fa-5x text-warning"></i>
+            </div>
+        </div>
+    </div>
+</div>
